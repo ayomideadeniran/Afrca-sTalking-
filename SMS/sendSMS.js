@@ -1,29 +1,29 @@
 const AfricasTalking = require('africastalking');
 
-// TODO: Initialize Africa's Talking
-
+// Initialize Africa's Talking
 const africastalking = AfricasTalking({
-  apiKey: 'atsk_135ba4674ab564291ac3004253ee55ce279cab21079d12c0d868692ff9f246d3094fe9a8', 
-  username: 'sandbox'
+    apiKey: 'atsk_135ba4674ab564291ac3004253ee55ce279cab21079d12c0d868692ff9f246d3094fe9a8',
+    username: 'sandbox',
 });
 
+module.exports = async function sendSMS(numbers, message) {
+    if (!numbers || numbers.length === 0) {
+        throw new Error("Recipients' numbers are required.");
+    }
+    if (!message) {
+        throw new Error("Message content is required.");
+    }
 
-module.exports = async function sendSMS() {
-    
-    // TODO: Send message
- try {
-  const result=await africastalking.SMS.send({
-    to: ['+2348118938941', '+2348024090961',], 
-    message: 'Hey Ninja! Wassup...',
-    from: '89098'
-  });
-  console.log(result);
-   } catch(ex) {
-  console.error(ex);
-} 
+    try {
+        const result = await africastalking.SMS.send({
+            to: numbers,
+            message: message,
+            from: '89098', // Optional sender ID
+        });
+        console.log('SMS sent successfully:', result);
+        return result;
+    } catch (error) {
+        console.error('Error sending SMS:', error);
+        throw error;
+    }
 };
-
-
-
-
-

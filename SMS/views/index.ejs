@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send SMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Send SMS</h1>
+
+        <!-- Display success or error message -->
+        <% if (message) { %>
+            <div class="message success"><%= message %></div>
+        <% } %>
+        <% if (error) { %>
+            <div class="message error"><%= error %></div>
+        <% } %>
+
+        <!-- SMS Form -->
+        <form action="/send-sms" method="POST">
+            <div>
+                <label for="numbers">Phone Numbers (comma-separated):</label><br>
+                <input type="text" id="numbers" name="numbers" placeholder="+2348111111111, +2348222222222" style="width: 100%;" required>
+            </div>
+            <div>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" placeholder="Type your message here" style="width: 100%;" rows="4" required></textarea>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit" style="padding: 10px 20px;">Send SMS</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
